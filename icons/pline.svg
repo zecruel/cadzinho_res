@@ -1,0 +1,7 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <line stroke-width="2" id="pline2" y2="14.88918" x2="15.86997" y1="20.42198" x1="4.88883" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" fill="none" stroke="#000000"/>
+  <path stroke="#000000" fill="none" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m18.99186,13.46413c4.98397,-2.41649 4.17848,-7.60184 3.17162,-9.36385c-1.00686,-1.762 -4.63159,-4.58125 -9.96797,-1.35927" id="pline8"/>
+  <rect id="pline1" stroke-width="2" stroke="#000000" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="1.07438" y="19.15908" width="3.82462" height="3.75509"/>
+  <rect id="pline7" stroke-width="2" stroke="#000000" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="15.08393" y="12.50574" width="3.82462" height="3.75509"/>
+  <rect id="pline4" stroke-width="2" stroke="#000000" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="8.3263" y="1.39321" width="3.82462" height="3.75509"/>
+</svg>
