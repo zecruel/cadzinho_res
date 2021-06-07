@@ -109,6 +109,7 @@ int listdir(char *dir, char *type) {
 					while( ( ch = fgetc(curr_file) ) != EOF ){
 						if (ch == '\"') fprintf (ret_file, "\\\"");
 						else if (ch == '\n') fprintf (ret_file, "\"\n\t\"");
+						else if (ch == '\r'){ /* nothing */}
 						else fputc(ch, ret_file);
 					}
 					fprintf (ret_file, "\"},\n\n");
