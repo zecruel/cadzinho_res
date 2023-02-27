@@ -1,0 +1,1077 @@
+------------- ../src/gui.c ----------------
+1719
+"USER_DEF"
+1720
+"User definied simple pattern"
+
+------------- ../src/gui_attrib.c ----------------
+
+52
+"Error: Attribute must have a Tag"
+87
+"ADD TAG"
+133
+"Add a Tag"
+173
+"Tag:"
+176
+"Value:"
+------------- ../src/gui_block.c ----------------
+76
+"Create a new block"
+82
+"Enter insert point"
+112
+"Blocks Manager"
+149
+"Attr"
+314
+"Error: Don't remove Block in use"
+317
+"Remove Block"
+333
+"Attributes"
+349
+"Edit Block"
+353
+"New name:"
+372
+"New description:"
+374
+"Update"
+414
+"Text to Attributes"
+417
+"Attrib. mark:"
+419
+"Hide mark:"
+421
+"Value mark:"
+423
+"Default value:"
+430
+"Create block from:"
+437
+"Interactive"
+446
+"Proceed"
+471
+"Path:"
+504
+"Only reference"
+506
+"Full path"
+513
+"Error: ivalid Block name"
+517
+"Error: exists Block with same name"
+539
+"NEW BLOCK"
+551
+"Error: in Block creation from file"
+740
+"Edit Block Attributes"
+
+------------- ../src/gui_circle.c ----------------
+34
+"CIRCLE"
+114
+"ARC"
+220
+"Circular arc"
+223
+"Place a circular arc"
+234
+"Enter circle end point"
+
+------------- ../src/gui_config.c ----------------
+65
+"Internal standard pattern library"
+459
+"Config"
+465
+"Preferences"
+467
+"3D"
+474
+"Preferences folder:"
+482
+"Open folder"
+486
+"Config File:"
+487
+"Open file"
+495
+"Reload config"
+525
+"The following window is used to visualize "
+526
+"the raw parameters of the selected elements, according to "
+527
+"the DXF specification. It is useful for advanced users to debug "
+528
+"current file entities"
+531
+"Open Info Window"
+540
+" or set all angles to 0"
+543
+"#Alpha"
+544
+"#Beta"
+545
+"#Gamma"
+551
+"Top"
+556
+"Front"
+561
+"Right"
+566
+"Bottom"
+571
+"Rear"
+576
+"Iso"
+
+------------- ../src/gui_dim.c ----------------
+31
+"Place a Linear Dim"
+80
+"Fixed angle"
+198
+"Linear DIMENSION"
+224
+"Place a Angular Dim"
+271
+"Enter distance"
+274
+"Fixed distance"
+447
+"Angular DIMENSION"
+471
+"Place a Dimension:"
+474
+"Radial"
+477
+"Diametric"
+522
+"Enter quadrant point"
+526
+"Enter oposite point"
+527
+"Enter radius point"
+529
+"Enter location"
+640
+"Diametric DIMENSION"
+641
+"Radial DIMENSION"
+667
+"Place a Ordinate Dim"
+713
+"X"
+716
+"Y"
+727
+"Enter start point"
+728
+"Enter extension"
+729
+"Next ordinate"
+731
+"Custom Text"
+835
+"Ordinate DIMENSION"
+860
+"Dimension Style Manager"
+874
+"List of styles"
+938
+"Delete"
+944
+"Error: Don't remove DIMSTYLE in use"
+948
+"Remove DIMSTYLE"
+957
+"Selected parameters"
+986
+"Global Scale"
+1002
+"Meas. Factor"
+1018
+"Dec. places"
+1033
+"Annotation text:"
+1045
+"Annotation text style:"
+1072
+"Terminator:"
+1090
+"Advanced"
+1094
+"Term. size"
+1110
+"Offset"
+1126
+"Extension"
+1142
+"Text size"
+1158
+"Text gap"
+1179
+"Dim Style Name"
+1192
+"Error: DIMSTYLE already exists"
+
+------------- ../src/gui_dupli.c ----------------
+56
+"DUPLI"
+103
+"Duplicate a selection"
+
+
+------------- ../src/gui_edit_attr.c ----------------
+41
+"Error: No attributes found"
+61
+"Edit Attributes"
+63
+"Select a Insert element"
+72
+"Edit data"
+"Hide"
+211
+"Error: No spaces allowed in tags"
+232
+"Edit Insert Attributes"
+
+------------- ../src/gui_edit_text.c ----------------
+
+104
+"Edit a text"
+106
+"Select a text element"
+108
+"Enter a new text"
+112
+"Edit text"
+------------- ../src/gui_ellip.c ----------------
+288
+"ELLIPSE"
+301
+"Isometric Arc"
+302
+"Left"
+305
+"Place a ellipse"
+314
+"Enter center point"
+316
+"Define major axis"
+320
+"Define circle radius"
+321
+"Define minor axis"
+324
+"Enter arc start point"
+327
+"Enter arc end point"
+
+------------- ../src/gui_explode.c ----------------
+65
+"EXPLODE"
+111
+"Explode elements"
+128
+"Insert"
+134
+"Attributes to text"
+136
+"Attributes to text:"
+138
+"Value"
+150
+"Poly Line"
+159
+"M Text"
+163
+"Char"
+172
+"Raw"
+177
+"Raw options"
+184
+"Poly"
+------------- ../src/gui_export.c ----------------
+41
+"HP-GL files (.plt)"
+42
+"G-Code files (.nc)"
+52
+"Position and scale"
+88
+"Driver specific"
+92
+"Feed:"
+102
+"Init:"
+106
+"End:"
+110
+"Move:"
+114
+"Stroke:"
+181
+"Export"
+196
+"Export: Created export output succesfully"
+198
+"Export Error"
+
+------------- ../src/gui_file.c ----------------
+18
+"Drawing files (.dxf)"
+19
+"Text files (.txt)"
+20
+"Patterns files (.pat)"
+21
+"Line style files (.lin)"
+26
+"PDF (.pdf)"
+198
+"Up"
+247
+"Size"
+264
+"Date"
+359
+"Selected:"
+412
+"File explorer"
+493
+"Open Drawing"
+559
+"Recent:"
+647
+"Save Drawing"
+654
+"Current directory:"
+657
+"File to Save on:"
+713
+"Existing File"
+720
+"Over write existing file?"
+
+------------- ../src/gui_find.c ----------------
+617
+"Find/Replace text"
+619
+"Search:"
+625
+"Tag"
+635
+"Find Next"
+661
+"Replace:"
+665
+"Current"
+705
+"End of search"
+717
+"Entire element"
+757
+"All"
+778
+"REPLACE"
+787
+"Total replaced: %d"
+788
+"No elements matched"
+
+
+------------- ../src/gui_hatch.c ----------------
+224
+"HATCH"
+245
+"Place a Hatch:"
+252
+"Points"
+256
+"Selection"
+267
+"Associative"
+279
+"User"
+281
+"Solid"
+292
+"Spacing"
+361
+"Confirm"
+381
+"Hatch Pattern"
+415
+"Family:"
+618
+"Ref: 10 x 10 units"
+620
+"#Scale"
+621
+"#Rotation"
+623
+"Choose"
+644
+"Hatch Pattern Library (.pat)"
+656
+"Add pattern family"
+658
+"File to Open:"
+
+------------- ../src/gui_image.c ----------------
+121
+"IMAGE"
+163
+"Place Raster Image"
+192
+"Attach"
+209
+"Enter last corner"
+
+------------- ../src/gui_info.c ----------------
+122
+"Info"
+128
+"Generate DB"
+138
+"Cannot open database: %s\n"
+146
+"Failed to fetch data: %s\n"
+161
+"Failed to insert data: %s\n"
+202
+"Failed to put data\n"
+224
+"BLK:"
+228
+"ENTS:"
+
+------------- ../src/gui_insert.c ----------------
+98
+"Place a Insert"
+102
+"Choose Block:"
+115
+"Error: Block not allowed"
+128
+"Error: Block not found"
+133
+"Explore"
+146
+"Enter place point"
+156
+"Select Block"
+169
+"Block_names"
+257
+"Hidden"
+259
+"Select"
+
+------------- ../src/gui_lay.c ----------------
+189
+"Layer Manager"
+314
+"C"
+378
+"Line type"
+394
+"Line weight"
+594
+"Error: Don't remove Layer in use"
+598
+"Remove Layer"
+609
+"Layer Color"
+638
+"Layer Name"
+651
+"Error: Layer already exists"
+676
+"Error: exists Layer with same name"
+
+
+------------- ../src/gui_line.c ----------------
+34
+"LINE"
+70
+"Place a single line"
+
+------------- ../src/gui_ltype.c ----------------
+649
+"Line Types Manager"
+770
+"Rename"
+783
+"Error: Don't remove Line Type in use"
+787
+"Remove Line Type"
+798
+"Global Scale Factor:"
+826
+"Current Object Scale:"
+840
+"Line Type Name"
+866
+"Error: exists Line Type with same name"
+895
+"Add Line Type"
+918
+"Description:"
+924
+"Apply Scale:"
+929
+"From:"
+932
+"Copy"
+933
+"Library"
+973
+"Default"
+978
+"Extra"
+983
+"File"
+1007
+"Line Type Library (.lin)"
+1039
+"Load"
+1060
+"Description"
+1136
+"Preview:"
+1165
+"Error: Select Source Line Type"
+1176
+"Error: Line Type already exists"
+
+
+------------- ../src/gui_measure.c ----------------
+65
+"Measure Distance"
+90
+"Distance: %.9g"
+93
+"Angle: %.7g"
+102
+"Points: %d"
+103
+"Total: %.9g"
+113
+"Current:"
+121
+"Last:"
+
+------------- ../src/gui_mirror.c ----------------
+85
+"MIRROR"
+169
+"Mirror a selection"
+179
+"Set the reflection line"
+180
+"Enter second point"
+
+------------- ../src/gui_move.c ----------------
+57
+"MOVE"
+107
+"Move a selection"
+112
+"Enter base point"
+
+------------- ../src/gui_mtext.c ----------------
+42
+"before = %d\n"
+47
+"after = %d\n"
+59
+"MTEXT"
+110
+"Place an inteli text"
+140
+"Text Height"
+141
+"Rect width"
+152
+"Edit inteli text"
+
+
+------------- ../src/gui_paste.c ----------------
+59
+"PASTE"
+105
+"Paste a selection"
+106
+"Enter destination point"
+
+------------- ../src/gui_pline.c ----------------
+56
+"POLYLINE"
+84
+"Place a poly line"
+91
+"Bulge"
+
+------------- ../src/gui_plugins.c ----------------
+13
+"Plugins"
+
+
+------------- ../src/gui_point.c ----------------
+7
+"Place a single point"
+35
+"POINT"
+
+------------- ../src/gui_print.c ----------------
+47
+"Portable Document Format (.pdf)"
+48
+"Scalable Vector Graphics (.svg)"
+49
+"Image PNG (.png)"
+50
+"Image JPG (.jpg)"
+51
+"Image Bitmap (.bmp)"
+52
+"Postscript (.ps)"
+121
+"Page setup"
+122
+"px"
+184
+"mm"
+185
+"inches"
+186
+"pixels"
+215
+"Width:"
+247
+"Scale & Position"
+251
+"Origin X:"
+261
+"Origin Y:"
+271
+"Scale:"
+283
+"View"
+304
+"Fit all"
+330
+"Centralize"
+356
+"Preview"
+365
+"Color options:"
+366
+"Monochrome"
+367
+"Dark"
+371
+"Output format:"
+394
+"Destination:"
+443
+"Print: Created print output succesfully"
+445
+"Print Error"
+
+------------- ../src/gui_prop.c ----------------
+60
+"Edit Properties"
+129
+"Entity: %s"
+136
+"Layer:"
+164
+"Ltype:"
+195
+"Color:"
+222
+"LW:"
+240
+"CHANGE PROPERTIES"
+275
+"Block:"
+281
+"Scale X:"
+284
+"Scale Y:"
+287
+"Scale Z:"
+293
+"Choose Color"
+
+------------- ../src/gui_rect.c ----------------
+43
+"RECT"
+71
+"Place a rectangle"
+75
+"Enter end point"
+
+------------- ../src/gui_rotate.c ----------------
+232
+"ROTATE"
+308
+"Rotate a selection"
+324
+"Confirm rotation"
+337
+"Angle=%.4g°"
+
+------------- ../src/gui_scale.c ----------------
+242
+"SCALE"
+329
+"3 points"
+332
+"Scale a selection"
+337
+"Keep Original"
+338
+"Proportional"
+343
+"Factor"
+347
+"X factor"
+348
+"Y factor"
+353
+"Select/Add element"
+356
+"Enter pivot point"
+359
+"First point"
+361
+"Confirm scale"
+365
+"End point"
+371
+"Factor=%.4g"
+
+------------- ../src/gui_script.c ----------------
+76
+"db: Thread paused at: %s-line %d\n"
+111
+"script timeout exceeded in %s, line %d, exec time %f s\n"
+486
+"cannot run script file: %s"
+586
+"Auto check: no access to CadZinho enviroment"
+597
+"Auto check: no access to CadZinho script object"
+641
+"Script"
+652
+"Execute"
+653
+"Breakpoints"
+654
+"Variables"
+660
+"Script_controls"
+664
+"Script file:"
+674
+"Lua Script (.lua)"
+679
+"Browse"
+755
+"Source:"
+757
+"Line:"
+761
+"Add"
+772
+"Breakpoints:"
+783
+"On/Off"
+787
+"Breaks"
+801
+"On"
+802
+"Off"
+821
+"All Globals"
+839
+"All Locals"
+858
+"vars"
+861
+"Global:"
+869
+"Global %s - %s\n"
+873
+"Local:"
+875
+"Print"
+885
+"Local %s - %s\n"
+925
+"Output:"
+926
+"Clear"
+997
+"error: %s"
+1002
+"Script %s"
+
+------------- ../src/gui_select.c ----------------
+183
+"Select objects"
+184
+"Mode:"
+189
+"Toggle"
+190
+"+"
+191
+"-"
+
+------------- ../src/gui_spline.c ----------------
+67
+"SPLINE"
+118
+"Fit points"
+121
+"Place a spline by:"
+125
+"Degree"
+126
+"Closed"
+130
+"Enter first point"
+132
+"Enter next point"
+
+------------- ../src/gui_text.c ----------------
+44
+"TEXT"
+90
+"Place an text"
+114
+"Text:"
+118
+"Height"
+
+------------- ../src/gui_toolbox.c ----------------
+12
+"Toolbox"
+50
+"Place"
+52
+"Dimension"
+258
+"Main"
+453
+"Layer: "
+471
+"ByB"
+477
+"ByL"
+480
+"Color: "
+517
+"Line type: "
+523
+"Line weight: "
+528
+"By Layer"
+533
+"By Block"
+559
+"About"
+566
+"CadZinho"
+572
+"By Ezequiel Rabelo de Aguiar"
+579
+"CadZinho is licensed under the MIT License."
+584
+"Build for: "
+586
+"Version: "
+594
+"Discard changes"
+601
+"Changes in drawing will be lost"
+603
+"Discard"
+672
+"attractors"
+751
+"history"
+809
+"%d of %d"
+
+------------- ../src/gui_tstyle.c ----------------
+296
+"Text Styles Manager"
+320
+"Name"
+336
+"Font"
+340
+"Subst"
+355
+"Width"
+371
+"Fix H"
+387
+"Angle"
+392
+"Flags"
+396
+"Used"
+497
+"Create"
+502
+"Edit"
+519
+"Remove"
+526
+"Error: Don't remove Standard Style"
+532
+"Error: Don't remove Style in use"
+535
+"Remove Style"
+546
+"Fonts"
+552
+"Style Name"
+564
+"Error: Text Style already exists"
+590
+"Edit Text Style"
+596
+"Name:"
+600
+"Font:"
+624
+"Width factor:"
+628
+"Fixed height:"
+632
+"Oblique angle:"
+639
+"Vertical"
+640
+"Backward"
+641
+"Upside down"
+645
+"OK"
+724
+"Error: Duplicated Text Style"
+725
+"Error: STANDARD style can't be renamed"
+728
+"Cancel"
+741
+"Manage Fonts"
+748
+"Available Fonts"
+851
+"Shapes files (.shp)"
+852
+"Binary shapes file (.shx)"
+853
+"True type font file (.ttf)"
+854
+"Open font file (.otf)"
+855
+"All files (*)"
+859
+"Load font"
+
+------------- ../src/gui_txt_prop.c ----------------
+63
+"Edit Text Properties"
+135
+"Type:"
+142
+"Style:"
+171
+"Vert:"
+179
+"Horiz:"
+188
+"Height:"
+198
+"Angle:"
+208
+"Rec W:"
+220
+"Modify"
+266
+"CHANGE TEXT PROPERTIES"
+279
+"Pick"
+
+------------- ../src/gui_vertex.c ----------------
+112
+"Select a element"
+127
+"Click again to modify"
+130
+"Select Vertex"
+134
+"Confirm modification"
+149
+"Selected vertex:"
+155
+"X:"
+160
+"Y:"
+165
+"Z:"
+170
+"Bulge:"
+178
+"#Bulge"
+204
+"EDIT VERTEX"
+
+------------- ../src/gui_xy.c ----------------
+176
+"X="
+181
+"len="
+240
+"Y="
+244
+"ang="
+301
+"Polar"
+307
+"Rectangular"
+395
+"Relative"
+399
+"Absolute"
+
+------------- ../src/gui_zoom.c ----------------
+8
+"Zoom in rectangle"
+11
+"Enter first corner"
+32
+"Enter zoom area"

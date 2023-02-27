@@ -1,0 +1,1627 @@
+------------- ../src/gui.c ----------------
+1719
+	strncpy(gui->list_pattern.name, "USER_DEF", DXF_MAX_CHARS);
+1720
+	strncpy(gui->list_pattern.descr, "User definied simple pattern", DXF_MAX_CHARS);
+1725
+	strncpy(gui->hatch_fam.name, "USER_DEF", DXF_MAX_CHARS);
+1726
+	strncpy(gui->hatch_fam.descr, "User definied simple pattern", DXF_MAX_CHARS);
+
+------------- ../src/gui_attrib.c ----------------
+
+52
+				snprintf(gui->log_msg, 63, "Error: Attribute must have a Tag");
+87
+			do_add_entry(&gui->list_do, "ADD TAG");
+133
+	nk_label(gui->ctx, "Add a Tag", NK_TEXT_LEFT);
+137
+		nk_label(gui->ctx, "Select a Insert element", NK_TEXT_LEFT);
+148
+		nk_label(gui->ctx, "Style:", NK_TEXT_LEFT);
+166
+		nk_checkbox_label(gui->ctx, "Hide", &gui->hide_tag);
+173
+		nk_label(gui->ctx, "Tag:", NK_TEXT_LEFT);
+176
+		nk_label(gui->ctx, "Value:", NK_TEXT_LEFT);
+181
+		gui->txt_h = nk_propertyd(gui->ctx, "Height", 1e-9, gui->txt_h, 1e9, SMART_STEP(gui->txt_h), SMART_STEP(gui->txt_h));
+182
+		gui->angle = nk_propertyd(gui->ctx, "Angle", -180.0, gui->angle, 180.0, 0.1, 0.1f);
+
+------------- ../src/gui_block.c ----------------
+57
+					do_add_entry(&gui->list_do, "NEW BLOCK"); /* undo/redo list*/
+76
+		nk_label(gui->ctx, "Create a new block", NK_TEXT_LEFT);
+79
+			nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+82
+			nk_label(gui->ctx, "Enter insert point", NK_TEXT_LEFT);
+84
+			nk_label(gui->ctx, "Confirm", NK_TEXT_LEFT);
+112
+	if (nk_begin(gui->ctx, "Blocks Manager", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+146
+				if (nk_button_label(gui->ctx, "Name")){
+149
+				if (nk_button_label(gui->ctx, "Attr")){
+152
+				if (nk_button_label(gui->ctx, "Used")){
+281
+		nk_checkbox_label(gui->ctx, "Hidden", &show_hidden_blks);
+286
+		if (nk_button_label(gui->ctx, "Create")){
+294
+		if (nk_button_label(gui->ctx, "Edit")){
+306
+		if (nk_button_label(gui->ctx, "Remove")){
+314
+					snprintf(gui->log_msg, 63, "Error: Don't remove Block in use");
+317
+					do_add_entry(&gui->list_do, "Remove Block");
+333
+		if (nk_button_label(gui->ctx, "Attributes")){
+343
+		if (nk_button_label(gui->ctx, "Select")){
+349
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Edit Block", NK_WINDOW_CLOSABLE, nk_rect(200, 40, 250, 220))){
+353
+				nk_label(gui->ctx, "New name:", NK_TEXT_LEFT);
+357
+				if (nk_button_label(gui->ctx, "Rename")){
+360
+						snprintf(gui->log_msg, 63, "Error: exists Block with same name");
+372
+				nk_label(gui->ctx, "New description:", NK_TEXT_LEFT);
+374
+				if (nk_button_label(gui->ctx, "Update")){
+383
+				if (nk_button_label(gui->ctx, "Cancel")){
+406
+		if (nk_begin(gui->ctx, "New Block", nk_rect(gui->next_win_x + 10, gui->next_win_y + 30, 320, 450), NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_MOVABLE|NK_WINDOW_CLOSABLE)){
+410
+			nk_label(gui->ctx, "Name:", NK_TEXT_LEFT);
+412
+			nk_label(gui->ctx, "Description:", NK_TEXT_LEFT);
+414
+			nk_checkbox_label(gui->ctx, "Text to Attributes", &gui->text2tag);
+417
+				nk_label(gui->ctx, "Attrib. mark:", NK_TEXT_LEFT);
+419
+				nk_label(gui->ctx, "Hide mark:", NK_TEXT_LEFT);
+421
+				nk_label(gui->ctx, "Value mark:", NK_TEXT_LEFT);
+423
+				nk_label(gui->ctx, "Default value:", NK_TEXT_LEFT);
+430
+			nk_label(gui->ctx, "Create block from:", NK_TEXT_LEFT);
+437
+			if (gui_tab (gui, "Interactive", from == INTERACTIVE)) from = INTERACTIVE;
+438
+			if (gui_tab (gui, "File", from == FROM_FILE)) from = FROM_FILE;
+446
+				if (nk_button_label(gui->ctx, "Proceed")){
+450
+						snprintf(gui->log_msg, 63, "Error: ivalid Block name");
+454
+						snprintf(gui->log_msg, 63, "Error: exists Block with same name");
+471
+				nk_label(gui->ctx, "Path:", NK_TEXT_LEFT);
+474
+				if (nk_button_label(gui->ctx, "Browse")){
+481
+						"Drawing files (.dxf)",
+482
+						"All files (*)"
+504
+				nk_checkbox_label(gui->ctx, "Only reference", &xref);
+506
+					nk_checkbox_label(gui->ctx, "Full path", &xref_full);
+510
+				if (nk_button_label(gui->ctx, "Create")){
+513
+						snprintf(gui->log_msg, 63, "Error: ivalid Block name");
+517
+						snprintf(gui->log_msg, 63, "Error: exists Block with same name");
+539
+							do_add_entry(&gui->list_do, "NEW BLOCK"); /* undo/redo list*/
+551
+							snprintf(gui->log_msg, 63, "Error: in Block creation from file");
+560
+			if (nk_button_label(gui->ctx, "Cancel")){
+655
+			if (nk_begin(gui->ctx, "Edit Attributes", nk_rect(gui->next_win_x + 100, gui->next_win_y + 100, 330, 360), NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_MOVABLE|NK_WINDOW_CLOSABLE)){
+672
+						if (nk_button_label(gui->ctx, "Tag")){
+675
+						if (nk_button_label(gui->ctx, "Value")){
+678
+						if (nk_button_label(gui->ctx, "Hide")){
+718
+				if (nk_button_label(gui->ctx, "OK")){
+724
+							snprintf(gui->log_msg, 63, "Error: No spaces allowed in tags");
+740
+					do_add_entry(&gui->list_do, "Edit Block Attributes");
+749
+				if (nk_button_label(gui->ctx, "Cancel")){
+
+------------- ../src/gui_circle.c ----------------
+34
+				do_add_entry(&gui->list_do, "CIRCLE");
+114
+				do_add_entry(&gui->list_do, "ARC");
+220
+	static const char *mode[] = {"Full circle","Circular arc"};
+223
+		nk_label(gui->ctx, "Place a circular arc", NK_TEXT_LEFT);
+230
+			nk_label(gui->ctx, "Enter center point", NK_TEXT_LEFT);
+234
+				nk_label(gui->ctx, "Enter circle end point", NK_TEXT_LEFT);
+237
+				nk_label(gui->ctx, "Enter arc start point", NK_TEXT_LEFT);
+245
+				nk_label(gui->ctx, "Enter arc end point", NK_TEXT_LEFT);
+        
+------------- ../src/gui_config.c ----------------
+65
+	gui->hatch_fam.next = dxf_hatch_family("Standard", "Internal standard pattern library", gui->dflt_pat);
+115
+		lua_pushliteral(L, "Auto check: no access to CadZinho enviroment");
+126
+		lua_pushstring(L, "Auto check: no access to CadZinho script object");
+377
+		lua_pushliteral(L, "Auto check: no access to CadZinho enviroment");
+388
+		lua_pushstring(L, "Auto check: no access to CadZinho script object");
+459
+	if (nk_begin(gui->ctx, "Config", nk_rect(418, 88, 400, 300),
+465
+		if (gui_tab (gui, "Preferences", cfg_grp == GRP_PREF)) cfg_grp = GRP_PREF;
+466
+		if (gui_tab (gui, "Info", cfg_grp == GRP_INFO)) cfg_grp = GRP_INFO;
+467
+		if (gui_tab (gui, "3D", cfg_grp == GRP_3D)) cfg_grp = GRP_3D;
+474
+			nk_label(gui->ctx, "Preferences folder:", NK_TEXT_LEFT);
+479
+			if (nk_button_label(gui->ctx, "Copy")){
+482
+			if (nk_button_label(gui->ctx, "Open folder")){
+486
+			nk_label(gui->ctx, "Config File:", NK_TEXT_LEFT);
+487
+			if (nk_button_label(gui->ctx, "Open file")){
+495
+			if (nk_button_label(gui->ctx, "Reload config")){
+525
+			nk_label_wrap(gui->ctx, "The following window is used to visualize "
+526
+				"the raw parameters of the selected elements, according to "
+527
+				"the DXF specification. It is useful for advanced users to debug "
+528
+				"current file entities");
+531
+			if (nk_button_label(gui->ctx, "Open Info Window")){
+540
+			nk_label_wrap(gui->ctx, "This is a experimental 3D view mode. To return to default 2D view, choose \"Top\" or set all angles to 0");
+543
+			nk_property_float(gui->ctx, "#Alpha", -180.0, &gui->alpha, 180.0f, 1.0f, 1.0);
+544
+			nk_property_float(gui->ctx, "#Beta", -180.0, &gui->beta, 180.0f, 1.0f, 1.0);
+545
+			nk_property_float(gui->ctx, "#Gamma", -180.0, &gui->gamma, 180.0f, 1.0f, 1.0);
+551
+			if (nk_button_label(gui->ctx, "Top")){
+556
+			if (nk_button_label(gui->ctx, "Front")){
+561
+			if (nk_button_label(gui->ctx, "Right")){
+566
+			if (nk_button_label(gui->ctx, "Bottom")){
+571
+			if (nk_button_label(gui->ctx, "Rear")){
+576
+			if (nk_button_label(gui->ctx, "Left")){
+581
+			if (nk_button_label(gui->ctx, "Iso")){
+
+------------- ../src/gui_dim.c ----------------
+31
+	nk_label(gui->ctx, "Place a Linear Dim", NK_TEXT_LEFT);
+39
+	nk_label(gui->ctx, "Style:", NK_TEXT_LEFT);
+73
+	if (gui->step == 0) nk_label(gui->ctx, "Enter start point", NK_TEXT_LEFT);
+74
+	else if (gui->step == 1) nk_label(gui->ctx, "Enter end point", NK_TEXT_LEFT);
+76
+		if (fix_dist) nk_label(gui->ctx, "Confirm", NK_TEXT_LEFT);
+77
+		else nk_label(gui->ctx, "Enter distance", NK_TEXT_LEFT);
+80
+	nk_checkbox_label(gui->ctx, "Fixed angle", &fix_angle);
+82
+		angle_fixed = nk_propertyd(gui->ctx, "Angle", -180.0, angle_fixed, 180.0, 1.0, 1.0);
+84
+	nk_checkbox_label(gui->ctx, "Fixed distance", &fix_dist);
+88
+	nk_checkbox_label(gui->ctx, "Custom Text", &custom_text);
+198
+				do_add_entry(&gui->list_do, "Linear DIMENSION");
+224
+	nk_label(gui->ctx, "Place a Angular Dim", NK_TEXT_LEFT);
+232
+	nk_label(gui->ctx, "Style:", NK_TEXT_LEFT);
+266
+	if (gui->step == 0) nk_label(gui->ctx, "Enter center point", NK_TEXT_LEFT);
+267
+	else if (gui->step == 1) nk_label(gui->ctx, "Enter start point", NK_TEXT_LEFT);
+268
+	else if (gui->step == 2) nk_label(gui->ctx, "Enter end point", NK_TEXT_LEFT);
+270
+		if (fix_dist) nk_label(gui->ctx, "Confirm", NK_TEXT_LEFT);
+271
+		else nk_label(gui->ctx, "Enter distance", NK_TEXT_LEFT);
+274
+	nk_checkbox_label(gui->ctx, "Fixed distance", &fix_dist);
+278
+	nk_checkbox_label(gui->ctx, "Custom Text", &custom_text);
+447
+				do_add_entry(&gui->list_do, "Angular DIMENSION");
+471
+	nk_label(gui->ctx, "Place a Dimension:", NK_TEXT_LEFT);
+474
+	if (nk_option_label(gui->ctx, "Radial", !diametric)) {
+477
+	if (nk_option_label(gui->ctx, "Diametric", diametric)){
+487
+	nk_label(gui->ctx, "Style:", NK_TEXT_LEFT);
+522
+		if (diametric) nk_label(gui->ctx, "Enter quadrant point", NK_TEXT_LEFT);
+523
+		else nk_label(gui->ctx, "Enter center point", NK_TEXT_LEFT);
+526
+		if (diametric) nk_label(gui->ctx, "Enter oposite point", NK_TEXT_LEFT);
+527
+		else nk_label(gui->ctx, "Enter radius point", NK_TEXT_LEFT);
+529
+	else nk_label(gui->ctx, "Enter location", NK_TEXT_LEFT);
+531
+	nk_checkbox_label(gui->ctx, "Custom Text", &custom_text);
+640
+				if (diametric) do_add_entry(&gui->list_do, "Diametric DIMENSION");
+641
+				else do_add_entry(&gui->list_do, "Radial DIMENSION");
+667
+	nk_label(gui->ctx, "Place a Ordinate Dim", NK_TEXT_LEFT);
+675
+	nk_label(gui->ctx, "Style:", NK_TEXT_LEFT);
+713
+	if (nk_option_label(gui->ctx, "X", x_dir)) {
+716
+	if (nk_option_label(gui->ctx, "Y", !x_dir)){
+727
+	if (gui->step == 0) nk_label(gui->ctx, "Enter start point", NK_TEXT_LEFT);
+728
+	else if (gui->step == 1) nk_label(gui->ctx, "Enter extension", NK_TEXT_LEFT);
+729
+	else nk_label(gui->ctx, "Next ordinate", NK_TEXT_LEFT);
+731
+	nk_checkbox_label(gui->ctx, "Custom Text", &custom_text);
+835
+				do_add_entry(&gui->list_do, "Ordinate DIMENSION");
+860
+	if (nk_begin(gui->ctx, "Dimension Style Manager", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+874
+		if (nk_group_begin(gui->ctx, "List of styles", NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_NO_SCROLLBAR)) {
+884
+				if (nk_button_label(gui->ctx, "Name")){
+887
+				if (nk_button_label(gui->ctx, "Used")){
+934
+			if (nk_button_label(gui->ctx, "Create")){
+938
+			if (nk_button_label(gui->ctx, "Delete")){
+944
+						snprintf(gui->log_msg, 63, "Error: Don't remove DIMSTYLE in use");
+948
+						do_add_entry(&gui->list_do, "Remove DIMSTYLE");
+957
+		if (nk_group_begin(gui->ctx, "Selected parameters", NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_NO_SCROLLBAR)) {
+986
+				nk_label(gui->ctx, "Global Scale", NK_TEXT_LEFT);
+1002
+				nk_label(gui->ctx, "Meas. Factor", NK_TEXT_LEFT);
+1018
+				nk_label(gui->ctx, "Dec. places", NK_TEXT_LEFT);
+1033
+				nk_label(gui->ctx, "Annotation text:", NK_TEXT_LEFT);
+1045
+				nk_label(gui->ctx, "Annotation text style:", NK_TEXT_LEFT);
+1072
+				nk_label(gui->ctx, "Terminator:", NK_TEXT_LEFT);
+1090
+				nk_checkbox_label(gui->ctx, "Advanced", &adv_param);
+1094
+					nk_label(gui->ctx, "Term. size", NK_TEXT_LEFT);
+1110
+					nk_label(gui->ctx, "Offset", NK_TEXT_LEFT);
+1126
+					nk_label(gui->ctx, "Extension", NK_TEXT_LEFT);
+1142
+					nk_label(gui->ctx, "Text size", NK_TEXT_LEFT);
+1158
+					nk_label(gui->ctx, "Text gap", NK_TEXT_LEFT);
+1179
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Dim Style Name", NK_WINDOW_CLOSABLE, nk_rect(10, 20, 220, 100))){
+1187
+				if (nk_button_label(gui->ctx, "OK")){
+1192
+						snprintf(gui->log_msg, 63, "Error: DIMSTYLE already exists");
+1205
+				if (nk_button_label(gui->ctx, "Cancel")){
+
+------------- ../src/gui_dupli.c ----------------
+56
+						do_add_entry(&gui->list_do, "DUPLI");
+103
+		nk_label(gui->ctx, "Duplicate a selection", NK_TEXT_LEFT);
+105
+			nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+108
+			nk_label(gui->ctx, "Enter base point", NK_TEXT_LEFT);
+110
+			nk_label(gui->ctx, "Enter destination point", NK_TEXT_LEFT);
+
+
+------------- ../src/gui_edit_attr.c ----------------
+41
+			snprintf(gui->log_msg, 63, "Error: No attributes found");
+61
+		nk_label(gui->ctx, "Edit Attributes", NK_TEXT_LEFT);
+63
+			nk_label(gui->ctx, "Select a Insert element", NK_TEXT_LEFT);
+72
+			nk_label(gui->ctx, "Edit data", NK_TEXT_LEFT);
+134
+				if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Edit Insert Attributes", NK_WINDOW_CLOSABLE|NK_WINDOW_MOVABLE, s)){
+141
+					nk_label(gui->ctx, "Block:", NK_TEXT_RIGHT);
+158
+							if (nk_button_label(gui->ctx, "Tag")){
+161
+							if (nk_button_label(gui->ctx, "Value")){
+164
+							if (nk_button_label(gui->ctx, "Hide")){
+205
+					if (nk_button_label(gui->ctx, "OK")){
+211
+								snprintf(gui->log_msg, 63, "Error: No spaces allowed in tags");
+232
+						do_add_entry(&gui->list_do, "Edit Insert Attributes");
+245
+					if (nk_button_label(gui->ctx, "Cancel")){
+          
+------------- ../src/gui_edit_text.c ----------------
+
+82
+				do_add_entry(&gui->list_do, "EDIT TEXT");
+104
+		nk_label(gui->ctx, "Edit a text", NK_TEXT_LEFT);
+106
+			nk_label(gui->ctx, "Select a text element", NK_TEXT_LEFT);
+108
+			nk_label(gui->ctx, "Enter a new text", NK_TEXT_LEFT);
+112
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Edit text", NK_WINDOW_CLOSABLE|NK_WINDOW_MOVABLE, s)){
+------------- ../src/gui_ellip.c ----------------
+288
+		do_add_entry(&gui->list_do, "ELLIPSE");
+301
+	static const char *mode[] = {"Full ellipse","Elliptical arc", "Isometric Circle", "Isometric Arc"};
+302
+	static const char *view[] = {"Top","Front", "Left"};
+305
+	nk_label(gui->ctx, "Place a ellipse", NK_TEXT_LEFT);
+314
+		nk_label(gui->ctx, "Enter center point", NK_TEXT_LEFT);
+316
+		nk_label(gui->ctx, "Define major axis", NK_TEXT_LEFT);
+320
+			nk_label(gui->ctx, "Define circle radius", NK_TEXT_LEFT);
+321
+		else nk_label(gui->ctx, "Define minor axis", NK_TEXT_LEFT);
+324
+		nk_label(gui->ctx, "Enter arc start point", NK_TEXT_LEFT);
+327
+		nk_label(gui->ctx, "Enter arc end point", NK_TEXT_LEFT);
+
+------------- ../src/gui_explode.c ----------------
+65
+						do_add_entry(&gui->list_do, "EXPLODE");
+107
+		nk_label(gui->ctx, "Explode elements", NK_TEXT_LEFT);
+108
+		nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+111
+		nk_label(gui->ctx, "Explode elements", NK_TEXT_LEFT);
+128
+		nk_checkbox_label(gui->ctx, "Insert", &ins);
+134
+			if (nk_group_begin(gui->ctx, "Attributes to text", NK_WINDOW_BORDER|NK_WINDOW_NO_SCROLLBAR)) {
+136
+				nk_label(gui->ctx, "Attributes to text:", NK_TEXT_LEFT);
+138
+				nk_checkbox_label(gui->ctx, "Value", &value);
+139
+				nk_checkbox_label(gui->ctx, "Tag", &tag);
+150
+		nk_checkbox_label(gui->ctx, "Poly Line", &poly);
+154
+		nk_checkbox_label(gui->ctx, "Dimension", &dim);
+159
+		nk_checkbox_label(gui->ctx, "M Text", &mtext);
+163
+		nk_checkbox_label(gui->ctx, "Char", &txt_chr);
+167
+		nk_checkbox_label(gui->ctx, "Hatch", &hatch);
+172
+		nk_checkbox_label(gui->ctx, "Raw", &raw);
+177
+			if (nk_group_begin(gui->ctx, "Raw options", NK_WINDOW_BORDER|NK_WINDOW_NO_SCROLLBAR)) {
+179
+				if (nk_option_label(gui->ctx, "Line", raw_line)) {
+184
+				if (nk_option_label(gui->ctx, "Poly", raw_pline)){
+------------- ../src/gui_export.c ----------------
+26
+	if (nk_begin(gui->ctx, "Export", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+41
+			[EXPORT_HPGL] = "HP-GL files (.plt)",
+42
+			[EXPORT_GCODE] = "G-Code files (.nc)",
+43
+			[EXPORT_NONE] = "All files (*)"
+52
+		if (nk_group_begin(gui->ctx, "Position and scale", NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_NO_SCROLLBAR)) {
+58
+			nk_label(gui->ctx, "Origin X:", NK_TEXT_RIGHT);
+68
+			nk_label(gui->ctx, "Origin Y:", NK_TEXT_RIGHT);
+78
+			nk_label(gui->ctx, "Scale:", NK_TEXT_RIGHT);
+88
+		if (nk_group_begin(gui->ctx, "Driver specific", NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_NO_SCROLLBAR)) {
+92
+				nk_label(gui->ctx, "Feed:", NK_TEXT_RIGHT);
+102
+				nk_label(gui->ctx, "Init:", NK_TEXT_RIGHT);
+106
+				nk_label(gui->ctx, "End:", NK_TEXT_RIGHT);
+110
+				nk_label(gui->ctx, "Move:", NK_TEXT_RIGHT);
+114
+				nk_label(gui->ctx, "Stroke:", NK_TEXT_RIGHT);
+124
+		nk_label(gui->ctx, "Output format:", NK_TEXT_RIGHT);
+147
+		nk_label(gui->ctx, "Destination:", NK_TEXT_LEFT);
+152
+		if (nk_button_label(gui->ctx, "Browse")){/* call file browser */
+181
+		if (nk_button_label(gui->ctx, "Export")){
+196
+				snprintf(gui->log_msg, 63, "Export: Created export output succesfully");
+198
+				snprintf(gui->log_msg, 63, "Export Error");
+        
+------------- ../src/gui_file.c ----------------
+17
+	[FILE_ALL] = "All files (*)",
+18
+	[FILE_DXF] = "Drawing files (.dxf)",
+19
+	[FILE_TXT] = "Text files (.txt)",
+20
+	[FILE_PAT] = "Patterns files (.pat)",
+21
+	[FILE_LIN] = "Line style files (.lin)",
+22
+	[FILE_SHP] = "Shapes files (.shp)",
+23
+	[FILE_SHX] = "Binary shapes file (.shx)",
+24
+	[FILE_TTF] = "True type font file (.ttf)",
+25
+	[FILE_OTF] = "Open font file (.otf)",
+26
+	[FILE_PDF] = "PDF (.pdf)",
+124
+	if (nk_begin(gui->ctx, "File explorer", nk_rect(550, 100, 600, 510),
+188
+		nk_label_colored(gui->ctx, "Current directory:", NK_TEXT_LEFT, nk_rgb(255,255,0));
+198
+		if (nk_button_label(gui->ctx,  "Up")){
+221
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Name", NK_TEXT_CENTERED)){
+226
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Name", NK_TEXT_CENTERED)){
+230
+			}else if (nk_button_label(gui->ctx, "Name")){
+238
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Size", NK_TEXT_CENTERED)){
+243
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Size", NK_TEXT_CENTERED)){
+247
+			}else if (nk_button_label(gui->ctx, "Size")){
+255
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Date", NK_TEXT_CENTERED)){
+260
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Date", NK_TEXT_CENTERED)){
+264
+			}else if (nk_button_label(gui->ctx, "Date")){
+359
+			nk_label_colored(gui->ctx, "Selected:", NK_TEXT_LEFT, nk_rgb(0,0,255));
+394
+			if (nk_button_label(gui->ctx,  "OK")){
+406
+			if (nk_button_label(gui->ctx,  "Cancel")){
+412
+				nk_window_show(gui->ctx, "File explorer", NK_HIDDEN);
+433
+	if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "File", NK_WINDOW_CLOSABLE, s)){
+435
+		nk_label(gui->ctx, "File to Open:", NK_TEXT_CENTERED);
+442
+		if ((nk_button_label(gui->ctx, "OK")) && (gui->show_file_br != 1)) {
+447
+		if (nk_button_label(gui->ctx, "Explore")) {
+493
+	if (nk_begin(gui->ctx, "Open Drawing", nk_rect(200, 150, 400, 350),
+500
+		nk_label_colored(gui->ctx, "Current directory:", NK_TEXT_LEFT, nk_rgb(255,255,0));
+503
+		nk_label(gui->ctx, "File to Open:", NK_TEXT_CENTERED);
+525
+		if ((nk_button_label(gui->ctx, "OK")) && (gui->show_file_br != 1)) {
+544
+		if (nk_button_label(gui->ctx, "Explore")) {
+559
+		nk_label(gui->ctx, "Recent:", NK_TEXT_CENTERED);
+579
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Discard changes", NK_WINDOW_CLOSABLE|NK_WINDOW_NO_SCROLLBAR, nk_rect(30, 100, 300, 100))){
+586
+				nk_label(gui->ctx, "Changes in drawing will be lost", NK_TEXT_LEFT);
+588
+				if ((nk_button_label(gui->ctx, "Discard")) && (gui->show_file_br != 1)) {
+601
+				if (nk_button_label(gui->ctx, "Cancel")) {
+647
+	if (nk_begin(gui->ctx, "Save Drawing", nk_rect(200, 150, 400, 180),
+654
+		nk_label_colored(gui->ctx, "Current directory:", NK_TEXT_LEFT, nk_rgb(255,255,0));
+657
+		nk_label(gui->ctx, "File to Save on:", NK_TEXT_CENTERED);
+679
+		if ((nk_button_label(gui->ctx, "OK")) && (gui->show_file_br != 1)) {
+699
+		if (nk_button_label(gui->ctx, "Explore")) {
+713
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Existing File", NK_WINDOW_CLOSABLE|NK_WINDOW_NO_SCROLLBAR, nk_rect(30, 100, 300, 100))){
+720
+				nk_label(gui->ctx, "Over write existing file?", NK_TEXT_LEFT);
+722
+				if ((nk_button_label(gui->ctx, "OK")) && (gui->show_file_br != 1)) {
+735
+				if (nk_button_label(gui->ctx, "Cancel")) {
+
+------------- ../src/gui_find.c ----------------
+617
+	nk_label(gui->ctx, "Find/Replace text", NK_TEXT_LEFT);
+619
+	nk_label(gui->ctx, "Search:", NK_TEXT_LEFT);
+623
+	nk_checkbox_label(gui->ctx, "Text", &f_text);
+624
+	nk_checkbox_label(gui->ctx, "MText", &f_mtext);
+625
+	nk_checkbox_label(gui->ctx, "Tag", &f_tag);
+635
+	if (nk_button_label(gui->ctx, "Find Next") && strlen(search) > 0 ){
+652
+				snprintf(log, 63, "End of search");
+657
+			snprintf(log, 63, "No elements matched");
+661
+	nk_label(gui->ctx, "Replace:", NK_TEXT_LEFT);
+665
+	if (nk_button_label(gui->ctx, "Current") && strlen(search) > 0 ){
+678
+				do_add_entry(&gui->list_do, "REPLACE");
+705
+				snprintf(log, 63, "End of search");
+710
+			snprintf(log, 63, "No elements matched");
+717
+	nk_checkbox_label(gui->ctx, "Entire element", &entire_el);
+721
+	if (nk_button_label(gui->ctx, "Selection") && strlen(search) > 0 ){
+743
+							do_add_entry(&gui->list_do, "REPLACE");
+754
+		if (n >0) snprintf(log, 63, "Total replaced: %d", n);
+755
+		else snprintf(log, 63, "No elements matched");
+757
+	if (nk_button_label(gui->ctx, "All") && strlen(search) > 0 ){
+778
+						do_add_entry(&gui->list_do, "REPLACE");
+787
+		if (n >0) snprintf(log, 63, "Total replaced: %d", n);
+788
+		else snprintf(log, 63, "No elements matched");
+
+
+------------- ../src/gui_hatch.c ----------------
+114
+							do_add_entry(&gui->list_do, "HATCH");
+224
+						do_add_entry(&gui->list_do, "HATCH");
+245
+		nk_label(gui->ctx, "Place a Hatch:", NK_TEXT_LEFT);
+251
+		nk_label(gui->ctx, "Mode:", NK_TEXT_LEFT);
+252
+		if (gui_tab (gui, "Points", gui->hatch_sel == 0)) {
+256
+		if (gui_tab (gui, "Selection", gui->hatch_sel == 1)) {
+267
+		nk_checkbox_label(gui->ctx, "Associative", &gui->hatch_assoc);
+269
+		if (gui->hatch_sel) nk_checkbox_label(gui->ctx, "Text", &gui->hatch_t_box);
+279
+		if (gui_tab (gui, "User", gui->h_type == HATCH_USER)) gui->h_type = HATCH_USER;
+280
+		if (gui_tab (gui, "Library", gui->h_type == HATCH_PREDEF)) gui->h_type = HATCH_PREDEF;
+281
+		if (gui_tab (gui, "Solid", gui->h_type == HATCH_SOLID)) gui->h_type = HATCH_SOLID;
+291
+				gui->user_patt.ang = nk_propertyd(gui->ctx, "Angle", 0.0, gui->user_patt.ang, 360.0, 0.1, 0.1f);
+292
+				gui->user_patt.dy = nk_propertyd(gui->ctx, "Spacing", 0.0, gui->user_patt.dy, 1e9, SMART_STEP(gui->user_patt.dy), SMART_STEP(gui->user_patt.dy));
+332
+				if (nk_button_label(gui->ctx, "Explore")) gui->show_hatch_mng = 1;//show_pat_pp = 1;
+336
+				nk_label(gui->ctx, "Name:", NK_TEXT_RIGHT);
+341
+				gui->patt_scale = nk_propertyd(gui->ctx, "#Scale", 1e-9, gui->patt_scale, 1e9, SMART_STEP(gui->patt_scale), SMART_STEP(gui->patt_scale));
+342
+				gui->patt_ang = nk_propertyd(gui->ctx, "Angle", 0.0, gui->patt_ang, 360.0, 0.1, 0.1f);
+352
+				nk_label(gui->ctx, "Enter first point", NK_TEXT_LEFT);
+354
+				nk_label(gui->ctx, "Enter next point", NK_TEXT_LEFT);
+359
+				nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+361
+			else	nk_label(gui->ctx, "Confirm", NK_TEXT_LEFT);
+381
+	if (nk_begin(gui->ctx, "Hatch Pattern", s,
+415
+		nk_label(gui->ctx, "Family:", NK_TEXT_RIGHT);
+618
+			nk_label(gui->ctx, "Ref: 10 x 10 units", NK_TEXT_CENTERED);
+620
+			patt_scale = nk_propertyd(gui->ctx, "#Scale", 1e-9, patt_scale, 1e9, SMART_STEP(patt_scale), SMART_STEP(patt_scale));
+621
+			patt_rot = nk_propertyd(gui->ctx, "#Rotation", 0.00, patt_rot, 360.0, 0.1, 0.1);
+623
+			if (nk_button_label(gui->ctx, "Choose")){ /*done the selection*/
+644
+				"Hatch Pattern Library (.pat)",
+645
+				"All files (*)"
+656
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Add pattern family", NK_WINDOW_CLOSABLE, s)){
+658
+				nk_label(gui->ctx, "File to Open:", NK_TEXT_CENTERED);
+663
+				if (nk_button_label(gui->ctx, "OK")) {
+678
+				if (nk_button_label(gui->ctx, "Explore")) {
+
+------------- ../src/gui_image.c ----------------
+121
+			do_add_entry(&gui->list_do, "IMAGE");
+155
+			"Image PNG (.png)",
+156
+			"Image JPG (.jpg)",
+157
+			"Image Bitmap (.bmp)",
+158
+			"All files (*)"
+163
+		nk_label(gui->ctx, "Place Raster Image", NK_TEXT_LEFT);
+165
+		if (nk_button_label(gui->ctx, "Browse")){/* call file browser */
+189
+		nk_checkbox_label(gui->ctx, "Proportional", &gui->proportional);
+192
+			if (nk_button_label(gui->ctx, "Attach")){
+206
+			nk_label(gui->ctx, "Enter first corner", NK_TEXT_LEFT);
+209
+			nk_label(gui->ctx, "Enter last corner", NK_TEXT_LEFT);
+
+------------- ../src/gui_info.c ----------------
+122
+	if (nk_begin(gui->ctx, "Info", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+128
+		if (nk_button_label(gui->ctx, "Generate DB")){
+138
+				printf("Cannot open database: %s\n", sqlite3_errmsg(db));
+146
+					printf("Failed to fetch data: %s\n", sqlite3_errmsg(db));
+161
+							printf("Failed to insert data: %s\n", sqlite3_errmsg(db));
+202
+										printf("Failed to put data\n" );
+224
+		nk_label(gui->ctx, "BLK:", NK_TEXT_LEFT);
+228
+		nk_label(gui->ctx, "ENTS:", NK_TEXT_LEFT);
+
+------------- ../src/gui_insert.c ----------------
+98
+		nk_label(gui->ctx, "Place a Insert", NK_TEXT_LEFT);
+102
+			nk_label(gui->ctx, "Choose Block:", NK_TEXT_LEFT);
+108
+			if (nk_button_label(gui->ctx, "OK")){ /* try go to next step */
+115
+							snprintf(gui->log_msg, 63, "Error: Block not allowed");
+128
+					snprintf(gui->log_msg, 63, "Error: Block not found");
+133
+			if (nk_button_label(gui->ctx, "Explore")) show_blk_pp = 1;
+141
+			nk_label(gui->ctx, "Block:", NK_TEXT_RIGHT);
+146
+			nk_label(gui->ctx, "Enter place point", NK_TEXT_LEFT);
+149
+			gui->scale_x = nk_propertyd(gui->ctx, "Scale", 0.0, gui->scale_x, 100000.0, 0.1, 0.1f);
+151
+			gui->angle = nk_propertyd(gui->ctx, "Angle", -180.0, gui->angle, 180.0, 0.1, 0.1f);
+156
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Select Block", NK_WINDOW_CLOSABLE, s)){
+169
+				if (nk_group_begin(gui->ctx, "Block_names", NK_WINDOW_BORDER)) {
+257
+				nk_checkbox_label(gui->ctx, "Hidden", &show_hidden_blks);
+259
+				if (nk_button_label(gui->ctx, "Select")){ /* select block and close popup */
+
+------------- ../src/gui_lay.c ----------------
+189
+	if (nk_begin(gui->ctx, "Layer Manager", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+289
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Name", NK_TEXT_CENTERED)){
+294
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Name", NK_TEXT_CENTERED)){
+298
+			}else if (nk_button_label(gui->ctx, "Name")){
+314
+			}else if (nk_button_label(gui->ctx, "C")){
+369
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Line type", NK_TEXT_CENTERED)){
+374
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Line type", NK_TEXT_CENTERED)){
+378
+			}else if (nk_button_label(gui->ctx, "Line type")){
+385
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Line weight", NK_TEXT_CENTERED)){
+390
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Line weight", NK_TEXT_CENTERED)){
+394
+			}else if (nk_button_label(gui->ctx, "Line weight")){
+401
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Used", NK_TEXT_CENTERED)){
+406
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Used", NK_TEXT_CENTERED)){
+410
+			}else if (nk_button_label(gui->ctx, "Used")){
+574
+		if (nk_button_label(gui->ctx, "Create")){
+581
+		if ((nk_button_label(gui->ctx, "Rename")) && (sel_lay >= 0)){
+589
+		if ((nk_button_label(gui->ctx, "Remove")) && (sel_lay >= 0)){
+594
+				snprintf(gui->log_msg, 63, "Error: Don't remove Layer in use");
+598
+				do_add_entry(&gui->list_do, "Remove Layer");
+609
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Layer Color", NK_WINDOW_CLOSABLE, nk_rect(220, 10, 220, 300))){
+638
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Layer Name", NK_WINDOW_CLOSABLE, nk_rect(10, 20, 220, 100))){
+646
+				if (nk_button_label(gui->ctx, "OK")){
+651
+							snprintf(gui->log_msg, 63, "Error: Layer already exists");
+676
+						else snprintf(gui->log_msg, 63, "Error: exists Layer with same name");
+685
+				if (nk_button_label(gui->ctx, "Cancel")){
+
+
+------------- ../src/gui_line.c ----------------
+34
+				do_add_entry(&gui->list_do, "LINE");
+70
+		nk_label(gui->ctx, "Place a single line", NK_TEXT_LEFT);
+72
+			nk_label(gui->ctx, "Enter first point", NK_TEXT_LEFT);
+74
+			nk_label(gui->ctx, "Enter end point", NK_TEXT_LEFT);
+
+------------- ../src/gui_ltype.c ----------------
+649
+	if (nk_begin(gui->ctx, "Line Types Manager", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+674
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Name", NK_TEXT_CENTERED)){
+679
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Name", NK_TEXT_CENTERED)){
+683
+			}else if (nk_button_label(gui->ctx, "Name")){
+688
+			nk_button_label(gui->ctx, "Description");
+689
+			nk_button_label(gui->ctx, "Preview");
+694
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Used", NK_TEXT_CENTERED)){
+699
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Used", NK_TEXT_CENTERED)){
+703
+			}else if (nk_button_label(gui->ctx, "Used")){
+765
+		if (nk_button_label(gui->ctx, "Add")){
+770
+		if ((nk_button_label(gui->ctx, "Rename")) && (sel_ltyp >= 0)){
+778
+		if ((nk_button_label(gui->ctx, "Remove")) && (sel_ltyp >= 0)){
+783
+				snprintf(gui->log_msg, 63, "Error: Don't remove Line Type in use");
+787
+				do_add_entry(&gui->list_do, "Remove Line Type");
+798
+		nk_label(gui->ctx, "Global Scale Factor:", NK_TEXT_RIGHT);
+826
+		nk_label(gui->ctx, "Current Object Scale:", NK_TEXT_RIGHT);
+840
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Line Type Name", NK_WINDOW_CLOSABLE, nk_rect(10, 20, 220, 100))){
+848
+				if (nk_button_label(gui->ctx, "OK")){
+866
+						else snprintf(gui->log_msg, 63, "Error: exists Line Type with same name");
+875
+				if (nk_button_label(gui->ctx, "Cancel")){
+895
+		if (nk_begin(gui->ctx, "Add Line Type", nk_rect(gui->next_win_x + 150, gui->next_win_y + 20, 560, 520), NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_MOVABLE|NK_WINDOW_CLOSABLE)){
+917
+			nk_label(gui->ctx, "Name:", NK_TEXT_LEFT);
+918
+			nk_label(gui->ctx, "Description:", NK_TEXT_LEFT);
+924
+			nk_label(gui->ctx, "Apply Scale:", NK_TEXT_RIGHT);
+925
+			scale = nk_propertyd(gui->ctx, "Factor", 1e-9, scale, 1.0e9, SMART_STEP(scale), SMART_STEP(scale));
+929
+			nk_label(gui->ctx, "From:", NK_TEXT_LEFT);
+932
+			if (gui_tab (gui, "Copy", mode == LT_ADD_CPY)) mode = LT_ADD_CPY;
+933
+			if (gui_tab (gui, "Library", mode == LT_ADD_LIB)) mode = LT_ADD_LIB;
+942
+					nk_label(gui->ctx, "Source:", NK_TEXT_LEFT);
+973
+					if (gui_tab (gui, "Default", lib_mode == LT_LIB_DFLT)) {
+978
+					if (gui_tab (gui, "Extra", lib_mode == LT_LIB_EXTRA)) {
+983
+					if (gui_tab (gui, "File", lib_mode == LT_LIB_FILE)) {
+1007
+							"Line Type Library (.lin)",
+1008
+							"All files (*)"
+1013
+						if (nk_button_label(gui->ctx, "Browse")){/* call file browser */
+1039
+						if (nk_button_label(gui->ctx, "Load")){
+1059
+							nk_button_label(gui->ctx, "Name");
+1060
+							nk_button_label(gui->ctx, "Description");
+1136
+						nk_label(gui->ctx, "Preview:", NK_TEXT_RIGHT);
+1140
+						prev_s = nk_propertyd(gui->ctx, "Scale", 1e-9, prev_s, 1.0e9, SMART_STEP(prev_s), SMART_STEP(prev_s));
+1147
+			if (nk_button_label(gui->ctx, "OK")){ /* proceeding to create a line type in drawing*/
+1156
+							snprintf(gui->log_msg, 63, "Error: Line Type already exists");
+1165
+						snprintf(gui->log_msg, 63, "Error: Select Source Line Type");
+1176
+							snprintf(gui->log_msg, 63, "Error: Line Type already exists");
+1186
+			if (nk_button_label(gui->ctx, "Cancel")){
+
+
+------------- ../src/gui_measure.c ----------------
+65
+		nk_label(gui->ctx, "Measure Distance", NK_TEXT_LEFT);
+67
+			nk_label(gui->ctx, "Enter first point", NK_TEXT_LEFT);
+69
+			nk_label(gui->ctx, "Enter next point", NK_TEXT_LEFT);
+79
+				snprintf(dist_str, 63, "Distance: %.9g", distance);
+82
+				snprintf(ang_str, 63, "Angle: %.7g", angle);
+90
+					snprintf(last_dist_str, 63, "Distance: %.9g", distance);
+93
+					snprintf(last_ang_str, 63, "Angle: %.7g", angle);
+102
+					snprintf(pt_str, 63, "Points: %d", gui->step);
+103
+					snprintf(total_str, 63, "Total: %.9g", total);
+113
+			nk_label_colored(gui->ctx, "Current:", NK_TEXT_LEFT, nk_rgb(255,255,0));
+121
+				nk_label_colored(gui->ctx, "Last:", NK_TEXT_LEFT, nk_rgb(255,255,0));
+
+------------- ../src/gui_mirror.c ----------------
+85
+						do_add_entry(&gui->list_do, "MIRROR");
+169
+		nk_label(gui->ctx, "Mirror a selection", NK_TEXT_LEFT);
+170
+		nk_checkbox_label(gui->ctx, "Keep Original", &gui->keep_orig);
+173
+			nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+176
+			nk_label(gui->ctx, "Set the reflection line", NK_TEXT_LEFT);
+177
+			nk_label(gui->ctx, "Enter first point", NK_TEXT_LEFT);
+179
+			nk_label(gui->ctx, "Set the reflection line", NK_TEXT_LEFT);
+180
+			nk_label(gui->ctx, "Enter second point", NK_TEXT_LEFT);
+
+------------- ../src/gui_move.c ----------------
+57
+						do_add_entry(&gui->list_do, "MOVE");
+107
+		nk_label(gui->ctx, "Move a selection", NK_TEXT_LEFT);
+109
+			nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+112
+			nk_label(gui->ctx, "Enter base point", NK_TEXT_LEFT);
+114
+			nk_label(gui->ctx, "Enter destination point", NK_TEXT_LEFT);
+
+------------- ../src/gui_mtext.c ----------------
+42
+				printf("before = %d\n", dxf_count_attr(new_el, 3));
+47
+				printf("after = %d\n", dxf_count_attr(new_el, 3));
+59
+				do_add_entry(&gui->list_do, "MTEXT");
+110
+		nk_label(gui->ctx, "Place an inteli text", NK_TEXT_LEFT);
+112
+		nk_label(gui->ctx, "Style:", NK_TEXT_LEFT);
+133
+		nk_label(gui->ctx, "Text:", NK_TEXT_LEFT);
+135
+		if (nk_button_label(gui->ctx,  "Edit")){
+140
+		gui->txt_h = nk_propertyd(gui->ctx, "Text Height", 1e-9, gui->txt_h, 1e9, SMART_STEP(gui->txt_h), SMART_STEP(gui->txt_h));
+141
+		gui->rect_w = nk_propertyd(gui->ctx, "Rect width", 0.0, gui->rect_w, 1e9, SMART_STEP(gui->rect_w), SMART_STEP(gui->rect_w));
+152
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Edit inteli text", NK_WINDOW_CLOSABLE|NK_WINDOW_MOVABLE, s)){
+
+
+------------- ../src/gui_paste.c ----------------
+59
+						do_add_entry(&gui->list_do, "PASTE");
+105
+		nk_label(gui->ctx, "Paste a selection", NK_TEXT_LEFT);
+106
+		nk_label(gui->ctx, "Enter destination point", NK_TEXT_LEFT);
+107
+		gui->scale_x = nk_propertyd(gui->ctx, "Scale", 0.0, gui->scale_x, 100000.0, 0.1, 0.1f);
+108
+		gui->angle = nk_propertyd(gui->ctx, "Angle", -180.0, gui->angle, 180.0, 0.1, 0.1f);
+
+------------- ../src/gui_pline.c ----------------
+56
+					do_add_entry(&gui->list_do, "POLYLINE");
+84
+		nk_label(gui->ctx, "Place a poly line", NK_TEXT_LEFT);
+86
+			nk_label(gui->ctx, "Enter first point", NK_TEXT_LEFT);
+88
+			nk_label(gui->ctx, "Enter next point", NK_TEXT_LEFT);
+90
+		nk_checkbox_label(gui->ctx, "Closed", &gui->closed);
+91
+		gui->bulge = nk_propertyd(gui->ctx, "Bulge", -10.0, gui->bulge, 10.0, 0.1, 0.1f);
+
+------------- ../src/gui_plugins.c ----------------
+13
+	if (nk_begin(gui->ctx, "Plugins", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+
+
+------------- ../src/gui_point.c ----------------
+7
+	nk_label(gui->ctx, "Place a single point", NK_TEXT_LEFT);
+35
+		do_add_entry(&gui->list_do, "POINT");
+    
+------------- ../src/gui_print.c ----------------
+28
+	if (nk_begin(gui->ctx, "Print", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+47
+			[PRT_PDF] = "Portable Document Format (.pdf)",
+48
+			[PRT_SVG] = "Scalable Vector Graphics (.svg)",
+49
+			[PRT_PNG] = "Image PNG (.png)",
+50
+			[PRT_JPG] = "Image JPG (.jpg)",
+51
+			[PRT_BMP] = "Image Bitmap (.bmp)",
+52
+			[PRT_PS] = "Postscript (.ps)",
+53
+			[PRT_NONE] = "All files (*)"
+121
+		if (nk_group_begin(gui->ctx, "Page setup", NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_NO_SCROLLBAR)) {
+122
+			static const char *unit_descr[] = {"in", "mm", "px"};
+184
+			if (nk_option_label(gui->ctx, "mm", new_unit == PRT_MM)) {new_unit = PRT_MM;}
+185
+			if (nk_option_label(gui->ctx, "inches", new_unit == PRT_IN)) {new_unit = PRT_IN;}
+186
+			if (nk_option_label(gui->ctx, "pixels", new_unit == PRT_PX)) {new_unit = PRT_PX;}
+215
+			nk_label(gui->ctx, "Width:", NK_TEXT_RIGHT);
+225
+			nk_label(gui->ctx, "Height:", NK_TEXT_RIGHT);
+235
+			if (nk_button_label(gui->ctx, "Rotate")){
+247
+		if (nk_group_begin(gui->ctx, "Scale & Position", NK_WINDOW_BORDER|NK_WINDOW_TITLE)) {
+251
+			nk_label(gui->ctx, "Origin X:", NK_TEXT_RIGHT);
+261
+			nk_label(gui->ctx, "Origin Y:", NK_TEXT_RIGHT);
+271
+			nk_label(gui->ctx, "Scale:", NK_TEXT_RIGHT);
+283
+			if (nk_button_label(gui->ctx, "View")){
+304
+			if (nk_button_label(gui->ctx, "Fit all")){
+330
+			if (nk_button_label(gui->ctx, "Centralize")){
+356
+		if (nk_group_begin(gui->ctx, "Preview", NK_WINDOW_BORDER|NK_WINDOW_NO_SCROLLBAR)) {
+365
+		nk_label(gui->ctx, "Color options:", NK_TEXT_RIGHT);
+366
+		nk_checkbox_label(gui->ctx, "Monochrome", &mono);
+367
+		nk_checkbox_label(gui->ctx, "Dark", &dark);
+371
+		nk_label(gui->ctx, "Output format:", NK_TEXT_RIGHT);
+394
+		nk_label(gui->ctx, "Destination:", NK_TEXT_LEFT);
+399
+		if (nk_button_label(gui->ctx, "Browse")){/* call file browser */
+428
+		if (nk_button_label(gui->ctx, "Print")){
+443
+				snprintf(gui->log_msg, 63, "Print: Created print output succesfully");
+445
+				snprintf(gui->log_msg, 63, "Print Error");
+
+------------- ../src/gui_prop.c ----------------
+60
+	nk_label(gui->ctx, "Edit Properties", NK_TEXT_LEFT);
+62
+		nk_label(gui->ctx, "Select a element", NK_TEXT_LEFT);
+129
+		snprintf(tmp_str, DXF_MAX_CHARS, "Entity: %s", ent->obj.name);
+136
+		nk_checkbox_label(gui->ctx, "Layer:", &en_lay);
+164
+		nk_checkbox_label(gui->ctx, "Ltype:", &en_ltyp); 
+195
+		nk_checkbox_label(gui->ctx, "Color:", &en_color);
+213
+		if ( abs(color) > 255 ) snprintf(tmp_str, DXF_MAX_CHARS, "By Layer");
+214
+		else if ( abs(color) == 0 ) snprintf(tmp_str, DXF_MAX_CHARS, "By Block");
+222
+		nk_checkbox_label(gui->ctx, "LW:", &en_lw);
+233
+		if (nk_button_label(gui->ctx, "Modify") && ( en_lay || en_ltyp || en_color || en_lw)){
+240
+					do_add_entry(&gui->list_do, "CHANGE PROPERTIES"); /* init do/undo list */
+265
+		if (nk_button_label(gui->ctx, "Pick")){
+275
+			nk_label(gui->ctx, "Block:", NK_TEXT_RIGHT);
+278
+			nk_label(gui->ctx, "Angle:", NK_TEXT_RIGHT);
+281
+			nk_label(gui->ctx, "Scale X:", NK_TEXT_RIGHT);
+284
+			nk_label(gui->ctx, "Scale Y:", NK_TEXT_RIGHT);
+287
+			nk_label(gui->ctx, "Scale Z:", NK_TEXT_RIGHT);
+293
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Choose Color", NK_WINDOW_CLOSABLE, nk_rect(220, 10, 220, 300))){
+295
+				if (nk_button_label(gui->ctx, "By Layer")){
+300
+				if (nk_button_label(gui->ctx, "By Block")){
+
+------------- ../src/gui_rect.c ----------------
+43
+				do_add_entry(&gui->list_do, "RECT");
+71
+		nk_label(gui->ctx, "Place a rectangle", NK_TEXT_LEFT);
+73
+			nk_label(gui->ctx, "Enter first point", NK_TEXT_LEFT);
+75
+			nk_label(gui->ctx, "Enter end point", NK_TEXT_LEFT);
+
+------------- ../src/gui_rotate.c ----------------
+98
+					do_add_entry(&gui->list_do, "ROTATE");
+232
+					do_add_entry(&gui->list_do, "ROTATE");
+305
+		static const char *mode[] = {"Active angle","3 points"};
+308
+		nk_label(gui->ctx, "Rotate a selection", NK_TEXT_LEFT);
+310
+		nk_checkbox_label(gui->ctx, "Keep Original", &gui->keep_orig);
+316
+			nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+319
+			nk_label(gui->ctx, "Enter pivot point", NK_TEXT_LEFT);
+322
+				nk_label(gui->ctx, "First point", NK_TEXT_LEFT);
+324
+				nk_label(gui->ctx, "Confirm rotation", NK_TEXT_LEFT);
+328
+			nk_label(gui->ctx, "End point", NK_TEXT_LEFT);
+337
+			snprintf(ang_str, 63, "Angle=%.4g°", angle);
+341
+			gui->angle = nk_propertyd(gui->ctx, "Angle", -180.0, gui->angle, 180.0, 0.1, 0.1f);
+
+------------- ../src/gui_scale.c ----------------
+99
+					do_add_entry(&gui->list_do, "SCALE");
+242
+					do_add_entry(&gui->list_do, "SCALE");
+329
+		static const char *mode[] = {"Active factor","3 points"};
+332
+		nk_label(gui->ctx, "Scale a selection", NK_TEXT_LEFT);
+337
+		nk_checkbox_label(gui->ctx, "Keep Original", &gui->keep_orig);
+338
+		nk_checkbox_label(gui->ctx, "Proportional", &gui->proportional);
+343
+				gui->scale_x = nk_propertyd(gui->ctx, "Factor", 1e-9, gui->scale_x, 1.0e9, SMART_STEP(gui->scale_x), SMART_STEP(gui->scale_x));
+347
+				gui->scale_x = nk_propertyd(gui->ctx, "X factor", 1e-9, gui->scale_x, 1.0e9, SMART_STEP(gui->scale_x), SMART_STEP(gui->scale_x));
+348
+				gui->scale_y = nk_propertyd(gui->ctx, "Y factor", 1e-9, gui->scale_y, 1.0e9, SMART_STEP(gui->scale_y), SMART_STEP(gui->scale_y));
+353
+			nk_label(gui->ctx, "Select/Add element", NK_TEXT_LEFT);
+356
+			nk_label(gui->ctx, "Enter pivot point", NK_TEXT_LEFT);
+359
+				nk_label(gui->ctx, "First point", NK_TEXT_LEFT);
+361
+				nk_label(gui->ctx, "Confirm scale", NK_TEXT_LEFT);
+365
+			nk_label(gui->ctx, "End point", NK_TEXT_LEFT);
+371
+			snprintf(ang_str, 63, "Factor=%.4g", scale_x);
+
+------------- ../src/gui_script.c ----------------
+76
+					snprintf(msg, DXF_MAX_CHARS-1, "db: Thread paused at: %s-line %d\n", source, ar->currentline);
+94
+			lua_pushstring(L, "Auto check: no access to CadZinho script object");
+111
+			snprintf(msg, DXF_MAX_CHARS-1, "script timeout exceeded in %s, line %d, exec time %f s\n", ar->source, ar->currentline, diff_t);
+486
+		snprintf(msg, DXF_MAX_CHARS-1, "cannot run script file: %s", lua_tostring(script->T, -1));
+514
+			snprintf(msg, DXF_MAX_CHARS-1, "error: %s", lua_tostring(script->T, -1));
+586
+		lua_pushliteral(L, "Auto check: no access to CadZinho enviroment");
+597
+		lua_pushstring(L, "Auto check: no access to CadZinho script object");
+641
+	if (nk_begin(gui->ctx, "Script", nk_rect(215, 88, 400, 380),
+652
+		if (gui_tab (gui, "Execute", script_tab == EXECUTE)) script_tab = EXECUTE;
+653
+		if (gui_tab (gui, "Breakpoints", script_tab == BREAKS)) script_tab = BREAKS;
+654
+		if (gui_tab (gui, "Variables", script_tab == VARS)) script_tab = VARS;
+660
+		if (nk_group_begin(gui->ctx, "Script_controls", NK_WINDOW_BORDER|NK_WINDOW_NO_SCROLLBAR)) {
+664
+				nk_label(gui->ctx, "Script file:", NK_TEXT_LEFT);
+674
+					"Lua Script (.lua)",
+675
+					"All files (*)"
+679
+				if (nk_button_label(gui->ctx, "Browse")){/* call file browser */
+716
+							snprintf(msg, DXF_MAX_CHARS-1, "error: %s", lua_tostring(gui->lua_script[0].T, -1));
+755
+				nk_label(gui->ctx, "Source:", NK_TEXT_RIGHT);
+757
+				nk_label(gui->ctx, "Line:", NK_TEXT_RIGHT);
+761
+				if (nk_button_label(gui->ctx, "Add")){
+772
+				nk_label(gui->ctx, "Breakpoints:", NK_TEXT_LEFT);
+773
+				if (nk_button_label(gui->ctx, "Remove")){
+783
+				//if (nk_button_label(gui->ctx, "On/Off")){
+787
+				if (nk_group_begin(gui->ctx, "Breaks", NK_WINDOW_BORDER)) {
+801
+						if (gui->brk_pts[i].enable) snprintf(str_tmp, DXF_MAX_CHARS-1, "On");
+802
+						else snprintf(str_tmp, DXF_MAX_CHARS-1, "Off");
+821
+				if (nk_button_label(gui->ctx, "All Globals")){
+839
+				if (nk_button_label(gui->ctx, "All Locals")){
+858
+				if (nk_group_begin(gui->ctx, "vars", NK_WINDOW_BORDER|NK_WINDOW_NO_SCROLLBAR)) {
+861
+					nk_label(gui->ctx, "Global:", NK_TEXT_LEFT);
+863
+					if (nk_button_label(gui->ctx, "Print")){
+869
+						snprintf(msg, DXF_MAX_CHARS-1, "Global %s - %s\n", glob, str_tmp);
+873
+					nk_label(gui->ctx, "Local:", NK_TEXT_LEFT);
+875
+					if (nk_button_label(gui->ctx, "Print")){
+885
+								snprintf(msg, DXF_MAX_CHARS-1, "Local %s - %s\n", name, str_tmp);
+925
+		nk_label(gui->ctx, "Output:", NK_TEXT_LEFT);
+926
+		if (nk_button_label(gui->ctx, "Clear")){ /* clear text */
+997
+				snprintf(msg, DXF_MAX_CHARS-1, "error: %s", lua_tostring(gui->lua_script[i].T, -1));
+1002
+					snprintf(gui->log_msg, 63, "Script %s", msg);
+
+------------- ../src/gui_select.c ----------------
+183
+		nk_label(gui->ctx, "Select objects", NK_TEXT_LEFT);
+184
+		nk_label(gui->ctx, "Mode:", NK_TEXT_LEFT);
+189
+		if (gui_tab (gui, "Toggle", gui->sel_mode == LIST_TOGGLE)) gui->sel_mode = LIST_TOGGLE;
+190
+		if (gui_tab (gui, "+", gui->sel_mode == LIST_ADD)) gui->sel_mode = LIST_ADD;
+191
+		if (gui_tab (gui, "-", gui->sel_mode == LIST_SUB)) gui->sel_mode = LIST_SUB;
+196
+		nk_label(gui->ctx, "Type:", NK_TEXT_LEFT);
+
+------------- ../src/gui_spline.c ----------------
+67
+						do_add_entry(&gui->list_do, "SPLINE");
+118
+		static const char *mode[] = {"Control points","Fit points"};
+121
+		nk_label(gui->ctx, "Place a spline by:", NK_TEXT_LEFT);
+125
+			nk_property_int(gui->ctx, "Degree", 2, &gui->sp_degree, 15, 1, 0.1);
+126
+		nk_checkbox_label(gui->ctx, "Closed", &gui->closed);
+130
+			nk_label(gui->ctx, "Enter first point", NK_TEXT_LEFT);
+132
+			nk_label(gui->ctx, "Enter next point", NK_TEXT_LEFT);
+
+------------- ../src/gui_text.c ----------------
+44
+			do_add_entry(&gui->list_do, "TEXT");
+90
+	nk_label(gui->ctx, "Place an text", NK_TEXT_LEFT);
+96
+	nk_label(gui->ctx, "Style:", NK_TEXT_LEFT);
+114
+	nk_label(gui->ctx, "Text:", NK_TEXT_LEFT);
+118
+	gui->txt_h = nk_propertyd(gui->ctx, "Height", 1e-9, gui->txt_h, 1e9, SMART_STEP(gui->txt_h), SMART_STEP(gui->txt_h));
+119
+	gui->angle = nk_propertyd(gui->ctx, "Angle", -180.0, gui->angle, 180.0, 0.1, 0.1f);
+
+------------- ../src/gui_toolbox.c ----------------
+12
+	if (nk_begin(gui->ctx, "Toolbox", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+50
+		if (gui_tab (gui, "Place", tool_grp == GRP_PLACE)) tool_grp = GRP_PLACE;
+51
+		if (gui_tab (gui, "Modify", tool_grp == GRP_MODIFY)) tool_grp = GRP_MODIFY;
+52
+		if (gui_tab (gui, "Dimension", tool_grp == GRP_DIM)) tool_grp = GRP_DIM;
+258
+	if (nk_begin(gui->ctx, "Main", nk_rect(2, 2, gui->win_w - 4, 83),
+453
+		nk_label(gui->ctx, "Layer: ", NK_TEXT_RIGHT);
+471
+			text_len = snprintf(text, 63, "%s", "ByB");
+477
+			text_len = snprintf(text, 63, "%s", "ByL");
+480
+		nk_label(gui->ctx, "Color: ", NK_TEXT_RIGHT);
+484
+			if (nk_button_label(gui->ctx, "By Layer")){
+489
+			if (nk_button_label(gui->ctx, "By Block")){
+517
+		nk_label(gui->ctx, "Line type: ", NK_TEXT_RIGHT);
+523
+		nk_label(gui->ctx, "Line weight: ", NK_TEXT_RIGHT);
+528
+			if (nk_button_label(gui->ctx, "By Layer")){
+533
+			if (nk_button_label(gui->ctx, "By Block")){
+559
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "About", NK_WINDOW_CLOSABLE|NK_WINDOW_NO_SCROLLBAR, s)){
+566
+				nk_label(gui->ctx, "CadZinho", NK_TEXT_CENTERED);
+572
+				nk_label(gui->ctx, "By Ezequiel Rabelo de Aguiar", NK_TEXT_LEFT);
+579
+				nk_label(gui->ctx, "CadZinho is licensed under the MIT License.",  NK_TEXT_CENTERED);
+584
+				nk_label(gui->ctx, "Build for: ",  NK_TEXT_RIGHT);
+586
+				nk_label(gui->ctx, "Version: ",  NK_TEXT_RIGHT);
+594
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Discard changes", NK_WINDOW_CLOSABLE|NK_WINDOW_NO_SCROLLBAR, nk_rect(200, 100, 300, 100))){
+601
+				nk_label(gui->ctx, "Changes in drawing will be lost", NK_TEXT_LEFT);
+603
+				if ((nk_button_label(gui->ctx, "Discard")) && (gui->show_file_br != 1)) {
+629
+				if (nk_button_label(gui->ctx, "Cancel")) {
+672
+		if (nk_group_begin(gui->ctx, "attractors", NK_WINDOW_BORDER|NK_WINDOW_NO_SCROLLBAR)) {
+751
+		if (nk_group_begin(gui->ctx, "history", NK_WINDOW_NO_SCROLLBAR)) {
+809
+			snprintf(text, 63, "%d of %d", gui->drwg_hist_wr, gui->drwg_hist_size);
+
+------------- ../src/gui_tstyle.c ----------------
+296
+	if (nk_begin(gui->ctx, "Text Styles Manager", nk_rect(gui->next_win_x, gui->next_win_y, gui->next_win_w, gui->next_win_h),
+311
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Name", NK_TEXT_CENTERED)){
+316
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Name", NK_TEXT_CENTERED)){
+320
+			}else if (nk_button_label(gui->ctx, "Name")){
+327
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Font", NK_TEXT_CENTERED)){
+332
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Font", NK_TEXT_CENTERED)){
+336
+			}else if (nk_button_label(gui->ctx, "Font")){
+340
+			if (nk_button_label(gui->ctx, "Subst")){
+346
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Width", NK_TEXT_CENTERED)){
+351
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Width", NK_TEXT_CENTERED)){
+355
+			}else if (nk_button_label(gui->ctx, "Width")){
+362
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Fix H", NK_TEXT_CENTERED)){
+367
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Fix H", NK_TEXT_CENTERED)){
+371
+			}else if (nk_button_label(gui->ctx, "Fix H")){
+378
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_DOWN, "Angle", NK_TEXT_CENTERED)){
+383
+					if (nk_button_symbol_label(gui->ctx, NK_SYMBOL_TRIANGLE_UP, "Angle", NK_TEXT_CENTERED)){
+387
+			}else if (nk_button_label(gui->ctx, "Angle")){
+392
+			if (nk_button_label(gui->ctx, "Flags")){
+396
+			if (nk_button_label(gui->ctx, "Used")){
+497
+		if (nk_button_label(gui->ctx, "Create")){
+502
+		if ((nk_button_label(gui->ctx, "Edit")) && (sel_t_sty >= 0)){
+519
+		if ((nk_button_label(gui->ctx, "Remove")) && (sel_t_sty >= 0)){
+526
+				snprintf(gui->log_msg, 63, "Error: Don't remove Standard Style");
+532
+					snprintf(gui->log_msg, 63, "Error: Don't remove Style in use");
+535
+					do_add_entry(&gui->list_do, "Remove Style");
+546
+		if (nk_button_label(gui->ctx, "Fonts")){
+552
+			if (nk_popup_begin(gui->ctx, NK_POPUP_STATIC, "Style Name", NK_WINDOW_CLOSABLE, nk_rect(10, 20, 220, 100))){
+561
+				if (nk_button_label(gui->ctx, "OK")){
+564
+						snprintf(gui->log_msg, 63, "Error: Text Style already exists");
+572
+				if (nk_button_label(gui->ctx, "Cancel")){
+590
+		if (nk_begin(gui->ctx, "Edit Text Style", nk_rect(gui->next_win_x, gui->next_win_y + gui->next_win_h + 3, 330, 220), NK_WINDOW_BORDER|NK_WINDOW_TITLE|NK_WINDOW_MOVABLE|NK_WINDOW_CLOSABLE)){
+596
+			nk_label(gui->ctx, "Name:", NK_TEXT_RIGHT);
+600
+			nk_label(gui->ctx, "Font:", NK_TEXT_RIGHT);
+624
+			nk_label(gui->ctx, "Width factor:", NK_TEXT_RIGHT);
+628
+			nk_label(gui->ctx, "Fixed height:", NK_TEXT_RIGHT);
+632
+			nk_label(gui->ctx, "Oblique angle:", NK_TEXT_RIGHT);
+639
+			nk_checkbox_label(gui->ctx, "Vertical", &vertical);
+640
+			nk_checkbox_label(gui->ctx, "Backward", &backward);
+641
+			nk_checkbox_label(gui->ctx, "Upside down", &upside);
+645
+			if (nk_button_label(gui->ctx, "OK")){
+724
+					if (sty_exist == 1) snprintf(gui->log_msg, 63, "Error: Duplicated Text Style");
+725
+					else if (sty_exist == 2) snprintf(gui->log_msg, 63, "Error: STANDARD style can't be renamed");
+728
+			if (nk_button_label(gui->ctx, "Cancel")){
+741
+		if (nk_begin(gui->ctx, "Manage Fonts", nk_rect(gui->next_win_x + 235, gui->next_win_y + 80, 400, 260), NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_TITLE|NK_WINDOW_CLOSABLE)){
+748
+			if (nk_group_begin(gui->ctx, "Available Fonts", NK_WINDOW_BORDER|NK_WINDOW_TITLE)) {
+851
+				"Shapes files (.shp)",
+852
+				"Binary shapes file (.shx)",
+853
+				"True type font file (.ttf)",
+854
+				"Open font file (.otf)",
+855
+				"All files (*)"
+859
+			if (nk_button_label(gui->ctx, "Load font")){
+
+------------- ../src/gui_txt_prop.c ----------------
+63
+	nk_label(gui->ctx, "Edit Text Properties", NK_TEXT_LEFT);
+65
+		nk_label(gui->ctx, "Select a element", NK_TEXT_LEFT);
+135
+			nk_label(gui->ctx, "Type:", NK_TEXT_RIGHT);
+142
+		nk_checkbox_label(gui->ctx, "Style:", &en_sty);
+171
+		nk_checkbox_label(gui->ctx, "Vert:", &en_al_v);
+179
+		nk_checkbox_label(gui->ctx, "Horiz:", &en_al_h);
+188
+		nk_checkbox_label(gui->ctx, "Height:", &en_h);
+198
+		nk_checkbox_label(gui->ctx, "Angle:", &en_ang);
+208
+		nk_checkbox_label(gui->ctx, "Rec W:", &en_rec);
+220
+		if (nk_button_label(gui->ctx, "Modify") && ( en_sty || en_al_v || en_al_h || en_h || en_ang || en_rec)){
+266
+								do_add_entry(&gui->list_do, "CHANGE TEXT PROPERTIES"); /* init do/undo list */
+279
+		if (nk_button_label(gui->ctx, "Pick")){
+
+------------- ../src/gui_vertex.c ----------------
+110
+	nk_label(gui->ctx, "Edit Vertex", NK_TEXT_LEFT);
+112
+		nk_label(gui->ctx, "Select a element", NK_TEXT_LEFT);
+127
+			nk_label(gui->ctx, "Click again to modify", NK_TEXT_LEFT);
+130
+			nk_label(gui->ctx, "Select Vertex", NK_TEXT_LEFT);
+134
+		nk_label(gui->ctx, "Confirm modification", NK_TEXT_LEFT);
+139
+		nk_label(gui->ctx, "Type:", NK_TEXT_RIGHT);
+149
+				nk_label(gui->ctx, "Selected vertex:", NK_TEXT_RIGHT);
+155
+					nk_label(gui->ctx, "X:", NK_TEXT_RIGHT);
+160
+					nk_label(gui->ctx, "Y:", NK_TEXT_RIGHT);
+165
+					nk_label(gui->ctx, "Z:", NK_TEXT_RIGHT);
+170
+						nk_label(gui->ctx, "Bulge:", NK_TEXT_RIGHT);
+178
+						double b = nk_propertyd(gui->ctx, "#Bulge", -10.0, bulge->value.d_data, 10.0, 0.1, 0.1f);
+204
+			do_add_entry(&gui->list_do, "EDIT VERTEX");
+
+------------- ../src/gui_xy.c ----------------
+173
+				nk_label_colored(gui->ctx, "X=", NK_TEXT_RIGHT, nk_rgb(255,255,0));
+176
+				nk_label(gui->ctx, "X=", NK_TEXT_RIGHT);
+181
+			nk_label(gui->ctx, "len=", NK_TEXT_RIGHT);
+237
+				nk_label_colored(gui->ctx, "Y=", NK_TEXT_RIGHT, nk_rgb(255,255,0));
+240
+				nk_label(gui->ctx, "Y=", NK_TEXT_RIGHT);
+244
+			nk_label(gui->ctx, "ang=", NK_TEXT_RIGHT);
+301
+			if(gui_selectable (gui, "Polar", gui->rect_polar)){
+307
+		else if(gui_selectable (gui, "Rectangular", gui->rect_polar)){
+395
+				if(gui_selectable (gui, "Relative", gui->entry_relative)){
+399
+			else if(gui_selectable (gui, "Absolute", gui->entry_relative)){
+
+------------- ../src/gui_zoom.c ----------------
+8
+	nk_label(gui->ctx, "Zoom in rectangle", NK_TEXT_LEFT);
+11
+		nk_label(gui->ctx, "Enter first corner", NK_TEXT_LEFT);
+32
+		nk_label(gui->ctx, "Enter zoom area", NK_TEXT_LEFT);

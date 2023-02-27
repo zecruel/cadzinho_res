@@ -1,0 +1,6 @@
+# sed script file
+# command line: sed -n -f sed.txt inputfile > output
+/\".*\"/ {
+=
+p
+}
